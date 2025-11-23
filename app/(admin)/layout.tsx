@@ -18,7 +18,7 @@ export default function DashboardLayout({
       <SidebarProvider>
         <SidebarLeft />
         {children}
-        <SidebarRight />
+        {/* <SidebarRight /> */}
       </SidebarProvider>
     </>
   );

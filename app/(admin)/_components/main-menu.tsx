@@ -10,6 +10,7 @@ import {
   LayoutDashboard,
   MapPin,
   Menu,
+  Newspaper,
   ShieldCheck,
   Shirt,
   SoapDispenserDroplet,
@@ -72,21 +73,22 @@ export function MainMenu() {
           />
           <CollapsibleMenu
             item={{
-              title: "Main Menu",
-              url: "/configuration/main-menu",
-              icon: Menu,
+              title: "Post",
+              url: "/management/post",
+              icon: Newspaper,
               isActive:
-                pathname.includes("/configuration/main-menu") ||
-                pathname.startsWith("/configuration/main-menu") ||
-                pathname.endsWith("/configuration/main-menu"),
+                (pathname.startsWith("/management/post") ||
+                  pathname.endsWith("/management/post") ||
+                  pathname.includes("/management/post")) &&
+                !pathname.startsWith("/management/post/category"),
               items: [
                 {
-                  title: "Single Menu",
-                  url: "/configuration/main-menu/single",
+                  title: "Category",
+                  url: "/management/category",
                 },
                 {
-                  title: "Sub Menu",
-                  url: "/configuration/main-menu/sub",
+                  title: "Post",
+                  url: "/management/post",
                 },
               ],
             }}
@@ -100,7 +102,7 @@ export function MainMenu() {
                     pathname.includes("/configuration/mosque") ||
                     pathname.startsWith("/configuration/mosque") ||
                     pathname.endsWith("/configuration/mosque")
-                      ? "active bg-sidebar-accent outline-border outline-2 rounded-md text-primary-foreground hover:bg-sidebar-accent"
+                      ? "active bg-primary outline-border outline-2 rounded-md text-primary-foreground hover:bg-primary/80 hover:text-primary-foreground"
                       : ""
                   }
                 >
@@ -124,7 +126,7 @@ export function MainMenu() {
                     pathname.includes("/configuration/users") ||
                     pathname.startsWith("/configuration/users") ||
                     pathname.endsWith("/configuration/users")
-                      ? "active bg-sidebar-accent outline-border outline-2 rounded-md text-primary-foreground hover:bg-sidebar-accent"
+                      ? "active bg-primary outline-border outline-2 rounded-md text-primary-foreground hover:bg-primary/80 hover:text-primary-foreground"
                       : ""
                   }
                 >
@@ -148,7 +150,7 @@ export function MainMenu() {
                     pathname.includes("/configuration/activity") ||
                     pathname.startsWith("/configuration/activity") ||
                     pathname.endsWith("/configuration/activity")
-                      ? "active bg-sidebar-accent outline-border outline-2 rounded-md text-primary-foreground hover:bg-sidebar-accent"
+                      ? "active bg-primary outline-border outline-2 rounded-md text-primary-foreground hover:bg-primary/80 hover:text-primary-foreground"
                       : ""
                   }
                 >
@@ -173,7 +175,7 @@ export function MainMenu() {
                     pathname.includes("/configuration/locations") ||
                     pathname.startsWith("/configuration/locations") ||
                     pathname.endsWith("/configuration/locations")
-                      ? "active bg-sidebar-accent outline-border outline-2 rounded-md text-primary-foreground hover:bg-sidebar-accent"
+                      ? "active bg-primary outline-border outline-2 rounded-md text-primary-foreground hover:bg-primary/80 hover:text-primary-foreground"
                       : ""
                   }
                 >

@@ -14,6 +14,8 @@ declare module "next-auth" {
         name: string;
         email: string;
         role: string;
+        emailVerified: Date | null;
+        avatarUrl: string | null;
       };
       token: string;
     };
@@ -25,6 +27,8 @@ declare module "next-auth" {
     email: string;
     role: string;
     accessToken: string;
+    emailVerified: Date | null;
+    avatarUrl: string | null;
   }
 }
 
@@ -35,6 +39,8 @@ declare module "next-auth/jwt" {
       name: string;
       email: string;
       role: string;
+      emailVerified: Date | null;
+      avatarUrl: string | null;
     };
   }
 }
@@ -89,6 +95,8 @@ export const authOptions: AuthOptions = {
                 id: String(userData.id),
                 name: userData.name,
                 email: userData.email,
+                emailVerified: userData.email_verified_at,
+                avatarUrl: userData.avatar_url,
                 role: userData.role,
                 accessToken: response.access_token,
               };
@@ -121,7 +129,13 @@ export const authOptions: AuthOptions = {
       if (user) {
         const u = user as User;
         token.accessToken = u.accessToken;
-        token.user = { name: u.name, email: u.email, role: u.role };
+        token.user = {
+          name: u.name,
+          email: u.email,
+          role: u.role,
+          emailVerified: u.emailVerified,
+          avatarUrl: u.avatarUrl,
+        };
       }
       return token;
     },
@@ -132,6 +146,8 @@ export const authOptions: AuthOptions = {
         user: {
           name: token.user?.name,
           email: token.user?.email,
+          emailVerified: token.user?.emailVerified,
+          avatarUrl: token.user?.avatarUrl,
           role: token.user?.role,
         },
         token: token.accessToken,

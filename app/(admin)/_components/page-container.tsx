@@ -23,6 +23,8 @@ import { signOut, useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import axios from "@/lib/axios";
+import { ThemeSwitcher } from "@/components/theme-switcher";
+import { Eye, Plus } from "lucide-react";
 
 export default function PageContainerDashboard({
   children,
@@ -98,9 +100,9 @@ export default function PageContainerDashboard({
         </AlertDialogContent>
       </AlertDialog>
       <SidebarInset>
-        <header className="bg-background sticky top-0 flex h-14 shrink-0 items-center gap-2">
-          <div className="flex flex-1 items-center gap-2 px-3">
-            <SidebarTrigger />
+        <header className="sticky top-0 z-50 bg-background/10 backdrop-blur supports-backdrop-filter:bg-background/10 flex h-12 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 border-b border:black/10 dark:border-white/10">
+          <div className="flex items-center gap-2 px-4">
+            <SidebarTrigger className="-ml-1" />
             <Separator
               orientation="vertical"
               className="mr-2 data-[orientation=vertical]:h-4"
@@ -129,9 +131,12 @@ export default function PageContainerDashboard({
               </BreadcrumbList>
             </Breadcrumb>
           </div>
+          <div className="ml-auto flex items-center gap-2 mr-4">
+            <ThemeSwitcher />
+          </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          <div className=" w-full max-w-7xl mx-auto">{children}</div>
+          <div className=" w-full max-w-7xl mx-auto space-y-4">{children}</div>
         </div>
       </SidebarInset>
     </>

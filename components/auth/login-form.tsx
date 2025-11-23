@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/form";
 import { Eye, EyeOff } from "lucide-react";
 import { Spinner } from "../ui/spinner";
+import Image from "next/image";
 
 export function LoginForm({
   className,
@@ -52,14 +53,17 @@ export function LoginForm({
       if (result?.error) {
         let msg = result.error;
         if (/ENOTFOUND|Network Error/i.test(msg)) {
-          msg = "Tidak dapat terhubung ke server. Periksa NEXT_PUBLIC_API_URL dan koneksi jaringan.";
+          msg =
+            "Tidak dapat terhubung ke server. Periksa NEXT_PUBLIC_API_URL dan koneksi jaringan.";
         } else {
           try {
             const parsed = JSON.parse(msg);
             if (parsed?.errors && typeof parsed.errors === "object") {
               const values = Object.values(parsed.errors as any);
               const fieldMessages = ([] as string[]).concat(...(values as any));
-              msg = fieldMessages.length ? fieldMessages.join(", ") : parsed?.message || "Authentication failed";
+              msg = fieldMessages.length
+                ? fieldMessages.join(", ")
+                : parsed?.message || "Authentication failed";
             } else if (parsed?.message) {
               msg = parsed.message;
             }
@@ -240,10 +244,12 @@ export function LoginForm({
           </div>
 
           <div className="bg-muted relative hidden md:block">
-            <img
-              src="/placeholder.svg"
+            <Image
+              src="https://plus.unsplash.com/premium_photo-1668708034552-223c0e4a8bc6?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Image"
               className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+              width={687}
+              height={454}
             />
           </div>
         </CardContent>

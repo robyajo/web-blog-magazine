@@ -57,7 +57,7 @@ export function CollapsibleMenu({ item }: { item: CollapsibleMenuProps }) {
                     subItem.url.includes(pathname) ||
                     pathname ===
                       subItem.url.replace(/^\//, `/${pathname.split("/")[1]}/`)
-                      ? "active bg-sidebar-primary outline-border outline-2 rounded-md text-primary-foreground hover:bg-sidebar-accent"
+                      ? "active bg-primary outline-border outline-2 rounded-md text-primary-foreground hover:bg-primary/80 hover:text-primary-foreground"
                       : ""
                   }
                 >

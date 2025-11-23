@@ -46,13 +46,25 @@ export function MainDashboard() {
           pathname.includes("/dashboard") ||
           pathname.startsWith("/dashboard") ||
           pathname.endsWith("/dashboard")
-            ? "active bg-sidebar-accent outline-border outline-2 rounded-md  hover:bg-sidebar-accent"
+            ? "active bg-primary outline-border outline-2 rounded-md text-primary-foreground hover:bg-primary/80 hover:text-primary-foreground"
             : ""
         }
       >
         <Tooltip>
           <TooltipTrigger asChild>
-            <SidebarMenuButton asChild>
+            <SidebarMenuButton
+              asChild
+              className={
+                pathname.includes("/dashboard") ||
+                pathname.startsWith("/dashboard") ||
+                pathname.endsWith("/dashboard") ||
+                "/dashboard".includes(pathname) ||
+                pathname ===
+                  "/dashboard".replace(/^\//, `/${pathname.split("/")[1]}/`)
+                  ? "active bg-primary outline-border outline-2 rounded-md text-primary-foreground hover:bg-primary/80 hover:text-primary-foreground"
+                  : ""
+              }
+            >
               <Link href="/dashboard">
                 <LayoutDashboard />
                 <span className="group-data-[collapsible=icon]:hidden">
