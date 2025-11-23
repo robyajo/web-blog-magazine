@@ -21,6 +21,7 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Eye, EyeOff } from "lucide-react";
+import { Spinner } from "../ui/spinner";
 
 export function LoginForm({
   className,
@@ -29,7 +30,9 @@ export function LoginForm({
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-
+  const DEMO_EMAIL =
+    process.env.NEXT_PUBLIC_DUMMY_EMAIL ?? "demo@kominfo.go.id";
+  const DEMO_PASSWORD = process.env.NEXT_PUBLIC_DUMMY_PASSWORD ?? "demo123";
   const form = useForm<LoginSchemaValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: { email: "", password: "" },
@@ -47,9 +50,21 @@ export function LoginForm({
       });
 
       if (result?.error) {
-        const msg = /ENOTFOUND|Network Error/i.test(result.error)
-          ? "Tidak dapat terhubung ke server. Periksa NEXT_PUBLIC_API_URL dan koneksi jaringan."
-          : result.error;
+        let msg = result.error;
+        if (/ENOTFOUND|Network Error/i.test(msg)) {
+          msg = "Tidak dapat terhubung ke server. Periksa NEXT_PUBLIC_API_URL dan koneksi jaringan.";
+        } else {
+          try {
+            const parsed = JSON.parse(msg);
+            if (parsed?.errors && typeof parsed.errors === "object") {
+              const values = Object.values(parsed.errors as any);
+              const fieldMessages = ([] as string[]).concat(...(values as any));
+              msg = fieldMessages.length ? fieldMessages.join(", ") : parsed?.message || "Authentication failed";
+            } else if (parsed?.message) {
+              msg = parsed.message;
+            }
+          } catch {}
+        }
         toast.error(msg);
         return;
       }
@@ -147,9 +162,37 @@ export function LoginForm({
                       </FormItem>
                     )}
                   />
-
-                  <Button type="submit" className="w-full" disabled={loading}>
-                    {loading ? "Logging in..." : "Login"}
+                  {/* Demo credentials hint + autofill */}
+                  <div className="flex items-center justify-between text-xs text-muted-foreground bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900 rounded-lg px-3 py-2.5">
+                    <div>
+                      <span className="font-semibold">Demo:</span>{" "}
+                      <span className="font-mono">{DEMO_EMAIL}</span> /{" "}
+                      <span className="font-mono">{DEMO_PASSWORD}</span>
+                    </div>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="h-7 px-2 text-xs"
+                      onClick={() => {
+                        form.setValue("email", DEMO_EMAIL, {
+                          shouldValidate: true,
+                        });
+                        form.setValue("password", DEMO_PASSWORD, {
+                          shouldValidate: true,
+                        });
+                      }}
+                    >
+                      Isi Developer
+                    </Button>
+                  </div>
+                  <Button
+                    type="submit"
+                    variant="outline"
+                    className="w-full"
+                    disabled={loading}
+                  >
+                    {loading ? <Spinner /> : "Login"}
                   </Button>
 
                   <div className="relative">

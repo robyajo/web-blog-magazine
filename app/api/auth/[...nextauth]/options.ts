@@ -42,7 +42,7 @@ declare module "next-auth/jwt" {
 export const authOptions: AuthOptions = {
   session: {
     strategy: "jwt" as SessionStrategy,
-    maxAge: 60 * 60 * 24 * 7, 
+    maxAge: 60 * 60 * 24 * 7,
     // maxAge: 20,
   },
   jwt: {
@@ -62,8 +62,6 @@ export const authOptions: AuthOptions = {
           if (!credentials?.email || !credentials?.password) {
             throw new Error("Email and password are required");
           }
-
-          
 
           const signinUrl = process.env.NEXT_PUBLIC_API_URL + "/api/login";
 
@@ -102,12 +100,16 @@ export const authOptions: AuthOptions = {
           }
         } catch (error: any) {
           if (error.response?.data) {
-            // Handle Axios error response
-            const { message, errors } = error.response.data;
-            if (errors && Array.isArray(errors)) {
-              throw new Error(`[${errors.join(", ")}]`);
+            const data = error.response.data;
+            const message = data?.message || "Authentication failed";
+            const errors = data?.errors;
+            if (errors && typeof errors === "object") {
+              throw new Error(JSON.stringify({ message, errors }));
             }
-            throw new Error(message || "Authentication failed");
+            if (Array.isArray(errors)) {
+              throw new Error(JSON.stringify({ message, errors }));
+            }
+            throw new Error(JSON.stringify({ message }));
           }
           throw error;
         }

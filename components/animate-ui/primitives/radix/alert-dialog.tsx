@@ -50,7 +50,7 @@ type AlertDialogPortalProps = Omit<
   'forceMount'
 >;
 
-function AlertDialogPortal(props: AlertDialogPortalProps) {
+function AlertDialogPortal({ children, ...props }: AlertDialogPortalProps) {
   const { isOpen } = useAlertDialog();
 
   return (
@@ -60,7 +60,9 @@ function AlertDialogPortal(props: AlertDialogPortalProps) {
           data-slot="alert-dialog-portal"
           forceMount
           {...props}
-        />
+        >
+          {children}
+        </AlertDialogPrimitive.Portal>
       )}
     </AnimatePresence>
   );

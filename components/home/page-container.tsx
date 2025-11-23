@@ -2,7 +2,12 @@
 import Link from "next/link";
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { ThemeSwitcher } from "../theme-switcher";
 import { useSession } from "next-auth/react";
@@ -57,6 +62,7 @@ export default function PageContainer({
                 </Button>
               </SheetTrigger>
               <SheetContent side="left" className="pr-0">
+                <SheetTitle></SheetTitle>
                 <div className="px-7">
                   <Link href="/" className="flex items-center">
                     <span className="font-bold">My App</span>
