@@ -79,15 +79,12 @@ export const usePosts = async ({
     params.append("page", String(page));
     params.append("per_page", String(per_page));
 
-    const response = await fetch(
-      `${api}/api/admin/post/index?${params.toString()}`,
-      {
-        cache: "no-store",
-        headers: {
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-      }
-    );
+    const response = await fetch(`${api}/api/admin/post?${params.toString()}`, {
+      cache: "no-store",
+      headers: {
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
+    });
     if (!response.ok) {
       throw new Error(`Failed to fetch posts: ${response.status}`);
     }

@@ -1,52 +1,53 @@
-"use client";
+import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { ArrowUpRight, CirclePlay } from "lucide-react";
+import Link from "next/link";
 
-import Image from "next/image";
-import { ArrowRight } from "lucide-react";
-
-export default function FeaturedStory() {
+export default function SectionHero() {
   return (
-    <section className="bg-muted py-12 md:py-20">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
-          {/* Label */}
-          <div className="text-xs font-semibold text-primary tracking-widest uppercase mb-4">
-            Cerita Utama
-          </div>
-
-          {/* Content Grid */}
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            {/* Featured Image */}
-            <div className="relative h-80 md:h-96 rounded-xl overflow-hidden">
-              <Image
-                src="https://images.unsplash.com/photo-1763244737839-220b4cd0259e?q=80&w=1187&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Featured story"
-                fill
-                className="object-cover"
-              />
-            </div>
-
-            {/* Featured Content */}
-            <div className="flex flex-col justify-center">
-              <div className="text-sm text-muted-foreground mb-4 font-medium">
-                Nov 23, 2025
-              </div>
-              <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight text-balance">
-                Inovasi Terbaru dalam Teknologi Masa Depan Mengubah Industri
-              </h1>
-              <p className="text-base text-muted-foreground mb-6 leading-relaxed">
-                Perusahaan teknologi terkemuka mengumumkan terobosan baru yang
-                akan merevolusi cara kita bekerja dan berkomunikasi. Penemuan
-                ini mencakup AI canggih dan otomasi intelligent yang dapat
-                meningkatkan produktivitas hingga 300%.
-              </p>
-              <button className="w-fit flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity font-medium">
-                Baca Selengkapnya
-                <ArrowRight size={18} />
-              </button>
-            </div>
-          </div>
+    <div className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
+      <AnimatedGridPattern
+        numSquares={30}
+        maxOpacity={0.1}
+        duration={3}
+        className={cn(
+          "mask-[radial-gradient(500px_circle_at_center,white,transparent)]",
+          "inset-x-0 h-full skew-y-12"
+        )}
+      />
+      <div className="relative z-10 text-center max-w-3xl">
+        <Badge
+          variant="secondary"
+          className="rounded-full py-1 border-border"
+          asChild
+        >
+          <Link href="#">
+            Just released v1.0.0 <ArrowUpRight className="ml-1 size-4" />
+          </Link>
+        </Badge>
+        <h1 className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl md:leading-[1.2] font-semibold tracking-tighter">
+          Customized Shadcn UI Blocks & Components
+        </h1>
+        <p className="mt-6 md:text-lg text-foreground/80">
+          Explore a collection of Shadcn UI blocks and components, ready to
+          preview and copy. Streamline your development workflow with
+          easy-to-implement examples.
+        </p>
+        <div className="mt-12 flex items-center justify-center gap-4">
+          <Button size="lg" className="rounded-full text-base">
+            Get Started <ArrowUpRight className="h-5! w-5!" />
+          </Button>
+          <Button
+            variant="outline"
+            size="lg"
+            className="rounded-full text-base shadow-none"
+          >
+            <CirclePlay className="h-5! w-5!" /> Watch Demo
+          </Button>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

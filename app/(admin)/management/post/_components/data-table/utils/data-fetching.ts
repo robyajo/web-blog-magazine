@@ -39,7 +39,7 @@ export function usePostsData(
       params.append("page", String(page));
       params.append("per_page", String(pageSize));
       const res = await fetch(
-        `${API_BASE}/api/admin/post/index?${params.toString()}`,
+        `${API_BASE}/api/admin/post?${params.toString()}`,
         {
           headers: {
             Authorization: `Bearer ${session?.data?.token || ""}`,
