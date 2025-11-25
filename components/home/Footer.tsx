@@ -8,7 +8,7 @@ import NewsletterSignUp from "@/components/home/NewsletterSignUp";
 
 export default function Footer() {
   return (
-    <footer className="bg-black overflow-hidden">
+    <footer className="bg-black overflow-hidden w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
       <NewsletterTicker />
       <div className="max-w-380 mx-auto px-6">
         <div className="py-8 xl:py-[128px] grid grid-cols-1 2xl:grid-cols-2 gap-2 md:gap-12 xl:gap-32 items-center">
