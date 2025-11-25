@@ -1,11 +1,12 @@
 import PageTitle from "@/components/home/PageTitle";
 import Loading from "@/components/home/PodcastsList/loading";
 import PodcastsList from "@/components/home/PodcastsList/PodcastsList";
+import { Metadata } from "next";
 import { Suspense } from "react";
 
-export const metadata = {
-  title: "Podcasts  | Fyrre Magazine",
-  description: "The latest podcasts list",
+export const metadata: Metadata = {
+  title: "Podcasts",
+  description: "Podcasts",
 };
 
 export default function PodcastsPage() {

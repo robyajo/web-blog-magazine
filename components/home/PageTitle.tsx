@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type PageTitleProps = {
   children: React.ReactNode;
   className?: string;
@@ -15,7 +17,9 @@ export default function PageTitle({
     <div className="max-w-380 w-full mx-auto">
       <h1 className={className}>{children}</h1>
       {imgSrc && (
-        <img
+        <Image
+          width={380}
+          height={380}
           src={imgSrc}
           alt={imgAlt}
           className="py-6 md:py-12 h-full w-full"

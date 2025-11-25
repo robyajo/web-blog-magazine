@@ -1,11 +1,12 @@
 import Articles from "@/components/home/Articles/Articles";
 import Loading from "@/components/home/Articles/loading";
 import PageTitle from "@/components/home/PageTitle";
+import { Metadata } from "next";
 import { Suspense } from "react";
 
-export const metadata = {
-  title: "Articles  | Fyrre Magazine",
-  description: "Articles from our team of writers, editors and artists",
+export const metadata: Metadata = {
+  title: "Blog",
+  description: "Blog",
 };
 
 export default function MagazinePage() {
