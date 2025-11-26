@@ -9,11 +9,11 @@ export const metadata: Metadata = {
 const breadcrumbs: BreadcrumbType[] = [
   {
     label: "Posts",
-    href: "/posts",
+    href: "/post",
   },
   {
     label: "Create New Post",
-    href: "/posts/create",
+    href: "/post/create",
     isCurrent: true,
   },
 ];

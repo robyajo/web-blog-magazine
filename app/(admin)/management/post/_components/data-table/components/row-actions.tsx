@@ -19,6 +19,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 // ** import schema
 import { userSchema } from "../schema";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -30,10 +32,14 @@ export function DataTableRowActions<TData>({
   table,
 }: DataTableRowActionsProps<TData>) {
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
+  const router = useRouter();
   const data = row.original;
 
   const handleEdit = () => {
-    console.log(data);
+    router.push(`/management/post/edit/${(data as any).uuid}`);
+  };
+  const handleView = () => {
+    router.push(`/management/post/${(data as any).uuid}`);
   };
 
   // Function to reset all selections
@@ -55,6 +61,7 @@ export function DataTableRowActions<TData>({
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[160px]">
           <DropdownMenuItem onClick={handleEdit}>Edit</DropdownMenuItem>
+          <DropdownMenuItem onClick={handleView}>View</DropdownMenuItem>
           <DropdownMenuItem>Make a copy</DropdownMenuItem>
           <DropdownMenuItem>Favorite</DropdownMenuItem>
           <DropdownMenuSeparator />

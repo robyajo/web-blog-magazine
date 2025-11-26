@@ -25,11 +25,12 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { ThemeSwitcher } from "../theme-switcher";
+import { useSession } from "next-auth/react";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const isMobile = useIsMobile();
-
+  const { data: session, status } = useSession();
   const today = new Date().toLocaleDateString("en-US", {
     weekday: "long",
     month: "long",
@@ -78,12 +79,21 @@ export default function Header() {
             <Link href="#">中文</Link>
           </div>
           <div className="flex items-center gap-3">
-            <Link
-              href="/login"
-              className="px-3 py-1 border border-border rounded-full hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              Log in
-            </Link>
+            {status === "authenticated" ? (
+              <Link
+                href="/dashboard"
+                className="px-3 py-1 border border-border rounded-full hover:bg-accent hover:text-accent-foreground transition-colors"
+              >
+                Dashboard
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className="px-3 py-1 border border-border rounded-full hover:bg-accent hover:text-accent-foreground transition-colors"
+              >
+                Log in
+              </Link>
+            )}
           </div>
         </div>
 
@@ -204,13 +214,23 @@ export default function Header() {
               <div className="border-b border-border p-6">
                 <h2 className="font-serif text-2xl mb-4">Fyrre Magazine</h2>
                 <div className="flex flex-col gap-2">
-                  <Link
-                    href="/login"
-                    className="px-4 py-2 border border-border text-center text-sm font-medium rounded hover:bg-muted transition-colors"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Log in
-                  </Link>
+                  {status === "authenticated" ? (
+                    <Link
+                      href="/dashboard"
+                      className="px-4 py-2 border border-border text-center text-sm font-medium rounded hover:bg-muted transition-colors"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Dashboard
+                    </Link>
+                  ) : (
+                    <Link
+                      href="/login"
+                      className="px-4 py-2 border border-border text-center text-sm font-medium rounded hover:bg-muted transition-colors"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Log in
+                    </Link>
+                  )}
                 </div>
               </div>
 

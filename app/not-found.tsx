@@ -1,12 +1,10 @@
+"use client";
 import PageTitle from "@/components/home/PageTitle";
 import Link from "next/link";
-
-export const metadata = {
-  title: "Page not found | Fyrre Magazine",
-  description: "Page does not exist",
-};
+import { useRouter } from "next/navigation";
 
 export default function NotFound() {
+  const router = useRouter();
   return (
     <main className="flex flex-col min-h-screen max-w-380 w-full mx-auto px-4 lg:pt-0 sm:pt-4 xs:pt-2 lg:pb-4 md:pb-4 sm:pb-2 xs:pb-2">
       <div>
@@ -21,6 +19,14 @@ export default function NotFound() {
           The page you&apos;re looking for does not exist. Click{" "}
           <Link className="font-semibold" href="/">
             here to return home
+          </Link>
+          or click{" "}
+          <Link
+            className="font-semibold"
+            href="/login"
+            onClick={() => router.back()}
+          >
+            here to go back
           </Link>
         </h2>
       </div>
